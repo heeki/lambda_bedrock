@@ -19,5 +19,6 @@ def handler(event, context):
         model_kwargs=event["model_kwargs"]
     )
     response = llm(event["prompt"])
-    print(json.dumps(response))
-    return response
+    output = [line.strip() for line in response.split("\n\n")]
+    print(json.dumps(output))
+    return output
