@@ -5,6 +5,7 @@ Globals:
   Function:
     Layers:
       - arn:aws:lambda:us-east-1:580247275435:layer:LambdaInsightsExtension:38
+      - arn:aws:lambda:us-east-1:017000801446:layer:AWSLambdaPowertoolsPythonV2:45
     MemorySize: !Ref pFnMemory
     Runtime: python3.11
     Timeout: !Ref pFnTimeout
@@ -75,6 +76,10 @@ Resources:
       CodeUri: ../src
       Handler: fn.handler
       Role: !GetAtt FnRole.Arn
+      Environment:
+        Variables:
+          POWERTOOLS_METRICS_NAMESPACE: LambdaBedrock
+          POWERTOOLS_SERVICE_NAME: test
       Layers:
         - !Ref pLangchainLayerArn
       Tags:
